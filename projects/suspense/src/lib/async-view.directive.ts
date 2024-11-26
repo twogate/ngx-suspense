@@ -1,6 +1,6 @@
 import { Directive, TemplateRef, inject } from '@angular/core';
 
-@Directive({ selector: '[susAsyncView]', standalone: true })
+@Directive({ selector: '[ngxSuspenseAsyncView]', standalone: true })
 export class AsyncViewDirective {
   readonly templateRef = inject(TemplateRef);
 }
