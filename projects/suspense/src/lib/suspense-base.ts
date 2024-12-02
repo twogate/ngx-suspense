@@ -1,19 +1,5 @@
-import {
-  ChangeDetectorRef,
-  EventEmitter,
-  TemplateRef,
-  ViewContainerRef,
-  inject,
-} from '@angular/core';
-import {
-  BehaviorSubject,
-  Observable,
-  Subscription,
-  filter,
-  firstValueFrom,
-  from,
-  take,
-} from 'rxjs';
+import { ChangeDetectorRef, EventEmitter, TemplateRef, ViewContainerRef, inject } from '@angular/core';
+import { BehaviorSubject, Observable, Subscription, filter, firstValueFrom, from, take } from 'rxjs';
 
 import {
   DEFAULT_SUSPENSE_ERROR_COMPONENT,
@@ -40,14 +26,8 @@ export abstract class SuspenseBase<T> {
   abstract errorView: TemplateRef<unknown> | undefined;
 
   protected readonly cdRef = inject(ChangeDetectorRef);
-  protected readonly defaultFallbackComponent = inject(
-    DEFAULT_SUSPENSE_FALLBACK_COMPONENT,
-    { optional: true }
-  );
-  protected readonly defaultErrorComponent = inject(
-    DEFAULT_SUSPENSE_ERROR_COMPONENT,
-    { optional: true }
-  );
+  protected readonly defaultFallbackComponent = inject(DEFAULT_SUSPENSE_FALLBACK_COMPONENT, { optional: true });
+  protected readonly defaultErrorComponent = inject(DEFAULT_SUSPENSE_ERROR_COMPONENT, { optional: true });
   protected abstract readonly viewContainerRef: ViewContainerRef;
   protected readonly readyViewInit$ = new BehaviorSubject(false);
 
@@ -81,9 +61,6 @@ export abstract class SuspenseBase<T> {
       },
       error: (error) => {
         this.onError(error);
-        if (options?.didComplete) {
-          options.didComplete();
-        }
       },
     });
   }
@@ -92,11 +69,7 @@ export abstract class SuspenseBase<T> {
     await this.viewReady;
 
     this.viewState = 'fallback';
-    this.updateView(
-      this.viewContainerRef,
-      this.fallbackView,
-      this.defaultFallbackComponent
-    );
+    this.updateView(this.viewContainerRef, this.fallbackView, this.defaultFallbackComponent);
     this.cdRef.detectChanges();
   }
 
@@ -104,12 +77,7 @@ export abstract class SuspenseBase<T> {
     await this.viewReady;
 
     this.viewState = 'error';
-    this.updateView(
-      this.viewContainerRef,
-      this.errorView,
-      this.defaultErrorComponent,
-      { error }
-    );
+    this.updateView(this.viewContainerRef, this.errorView, this.defaultErrorComponent, { error });
     this.errorCaptured.emit(error);
     this.cdRef.detectChanges();
   }
@@ -127,7 +95,7 @@ export abstract class SuspenseBase<T> {
     viewContainerRef: ViewContainerRef,
     templateRef: TemplateRef<unknown> | undefined,
     defaultComponentData?: SuspenseComponentData | null,
-    context?: unknown
+    context?: unknown,
   ) {
     viewContainerRef.clear();
 
