@@ -1,14 +1,24 @@
-.loaded-container {
+.status-view-container {
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: #f0f4f8;
   font-family: Arial, sans-serif;
   padding: 20px 0;
+
+  &.loading {
+    --color: #4c56af;
+  }
+  &.error {
+    --color: #f44336;
+  }
+  &.loaded {
+    --color: #4caf50;
+  }
 }
 
-.loaded-title {
+.status-view-text {
   font-size: 20px;
   font-weight: bold;
-  color: #4caf50;
+  color: var(--color);
 }

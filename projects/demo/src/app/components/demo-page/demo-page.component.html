@@ -1,26 +1,18 @@
 <section class="section">
-  <h2 class="title">http request with default components</h2>
-  <ng-template [ngxSuspense]="fetchRandomDog$" let-data="value">
-    <img [src]="data.message" alt="cat" width="100%" />
-  </ng-template>
-  <button (click)="refreshDog()">reload</button>
-</section>
-
-<section class="section">
   <h2 class="title">with custom components</h2>
 
   <div class="content">
     <ng-container *ngxSuspense="source1$; fallback: Fallback; error: Error">
-      <app-loaded></app-loaded>
+      <app-status-view [status]="'loaded'" [message]="'Loaded'"></app-status-view>
     </ng-container>
   </div>
 
   <ng-template #Fallback>
-    <div class="loader-container">
-      <app-spinner></app-spinner>
-    </div>
+    <app-status-view [status]="'loading'" [message]="'Loading...'"></app-status-view>
   </ng-template>
-  <ng-template #Error let-error="error"> Error {{ error.message }} </ng-template>
+  <ng-template #Error let-error="error">
+    <app-status-view [status]="'error'" [message]="'Error'"></app-status-view>
+  </ng-template>
 </section>
 
 <section class="section">
@@ -28,7 +20,15 @@
 
   <div class="content">
     <ng-container *ngxSuspense="source2$">
-      <app-loaded></app-loaded>
+      <app-status-view [status]="'loaded'" [message]="'Loaded'"></app-status-view>
     </ng-container>
   </div>
+</section>
+
+<section class="section">
+  <h2 class="title">use http request</h2>
+  <ng-template [ngxSuspense]="fetchRandomDog$" let-data="value">
+    <img [src]="data.message" alt="cat" width="100%" />
+  </ng-template>
+  <button (click)="refreshDog()">reload</button>
 </section>
