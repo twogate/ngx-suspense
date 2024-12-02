@@ -10,13 +10,7 @@ import { SuspenseDirective } from './lib/suspense.directive';
 
 export * from './lib/suspense-providers';
 export * from './lib/suspense.type';
-export {
-  AsyncViewDirective,
-  ErrorViewDirective,
-  FallbackViewDirective,
-  SuspenseComponent,
-  SuspenseDirective,
-};
+export { AsyncViewDirective, ErrorViewDirective, FallbackViewDirective, SuspenseComponent, SuspenseDirective };
 
 export const SuspenseComponents = [
   SuspenseComponent,

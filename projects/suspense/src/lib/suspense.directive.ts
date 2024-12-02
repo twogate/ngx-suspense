@@ -16,10 +16,7 @@ import { SuspenseBase } from './suspense-base';
   selector: '[ngxSuspense]',
   standalone: true,
 })
-export class SuspenseDirective<T = unknown>
-  extends SuspenseBase<T>
-  implements AfterViewInit
-{
+export class SuspenseDirective<T = unknown> extends SuspenseBase<T> implements AfterViewInit {
   @Input('ngxSuspense')
   set source(source: Observable<T> | Promise<T>) {
     this.setSource(source);
@@ -44,10 +41,7 @@ export class SuspenseDirective<T = unknown>
     this.readyViewInit$.next(true);
   }
 
-  static ngTemplateContextGuard<U>(
-    _directive: SuspenseDirective<U>,
-    context: unknown
-  ): context is { value: U } {
+  static ngTemplateContextGuard<U>(_directive: SuspenseDirective<U>, context: unknown): context is { value: U } {
     return true;
   }
 }

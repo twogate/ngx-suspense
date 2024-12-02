@@ -25,10 +25,7 @@ import { SuspenseBase } from './suspense-base';
   template: ` <ng-template #anchor></ng-template> `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SuspenseComponent<T = unknown>
-  extends SuspenseBase<T>
-  implements AfterViewInit
-{
+export class SuspenseComponent<T = unknown> extends SuspenseBase<T> implements AfterViewInit {
   @Input()
   set source(source: Observable<T> | Promise<T>) {
     this.setSource(source);
